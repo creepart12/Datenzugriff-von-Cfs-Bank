@@ -73,7 +73,8 @@
         <!-- Füllt sich dynamisch -->
         <div class="muted">Bitte melde dich zuerst an.</div>
       </div>
-      <div style="margin-top:12px; display:flex; justify-content:flex-end">
+      <div style="margin-top:12px; display:flex; justify-content:flex-end; gap:8px">
+        <button id="refreshBtn" class="secondary" type="button">Aktualisieren 🔄</button>
         <button id="logoutBtn" class="secondary">Abmelden</button>
       </div>
     </aside>
@@ -113,6 +114,7 @@ const accountSection = document.getElementById('accountSection');
 const accountContent = document.getElementById('accountContent');
 const logoutBtn = document.getElementById('logoutBtn');
 const loginSection = document.getElementById('loginSection');
+const refreshBtn = document.getElementById('refreshBtn');
 
 let currentAccount = null;
 
@@ -263,6 +265,11 @@ loginBtn.addEventListener('click', login);
 clearBtn.addEventListener('click', ()=>{ kontoInput.value=''; pinInput.value=''; clearMessage(); kontoInput.focus(); });
 logoutBtn.addEventListener('click', logout);
 pinInput.addEventListener('keydown', (e)=>{ if(e.key === 'Enter') login(); });
+
+/* AKTUALISIEREN-Button: lädt Kontodaten + Transaktionen neu */
+refreshBtn.addEventListener('click', () => {
+  if(currentAccount) loadAndRenderAccount();
+});
 
 /* initial focus */
 kontoInput.focus();
